@@ -1,5 +1,7 @@
 'use strict';
-
+// Wrap with Immediately Invoked Function Expression (IIFE)
+// https://github.com/toddmotto/angularjs-styleguide#modules
+(function () {
 angular.module('translunar')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
@@ -62,3 +64,4 @@ angular.module('translunar')
       awesomeThing.rank = Math.random();
     });
   });
+})();
