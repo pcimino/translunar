@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-angular.module('translunar')
+angular.module('Contact', [])
   .controller('ContactCtrl', function ($scope) {
     $scope.awesomeThings = [
       {

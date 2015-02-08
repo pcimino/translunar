@@ -1,6 +1,6 @@
 'use strict';
 (function () {
-angular.module('translunar', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'mm.foundation'])
+angular.module('translunar', ['Main', 'Contact', 'About', 'Clients', 'Projects', 'ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ui.router', 'mm.foundation'])
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {

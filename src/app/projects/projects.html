@@ -6,7 +6,7 @@
     <div class="large-12 large-text-center columns">
       <div class="panel">
         <h1>About</h1>
-        <img src="assets/images/FullLogo_1000-sq.png" alt="I'm Yeoman"><br>
+        <img src="assets/images/FullLogo_1000-sq.png" alt="Trans Lunar Designs Incorporated"><br>
         <p>Always a pleasure scaffolding your apps.</p>
         <p><a class="button radius" ng-href="#">Splendid!</a></p>
       </div>
@@ -14,13 +14,13 @@
   </div>
 
   <div class="row">
-    <div class="large-4 columns" ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'">
+    <div class="large-4 columns" ng-repeat="projectItem in project | orderBy:'rank'">
       <div class="th">
-        <img class="right" ng-src="assets/images/{{awesomeThing.logo}}" alt="{{awesomeThing.title}}">
+        <img class="right" ng-src="assets/images/{{projectItem.logo}}" alt="{{projectItem.title}}">
         <div class="caption">
-          <h3>{{awesomeThing.title}}</h3>
-          <p>{{awesomeThing.description}}</p>
-          <p><a ng-href="{{awesomeThing.url}}">{{awesomeThing.url}}</a></p>
+          <h3>{{projectItem.title}}</h3>
+          <p></p>
+          <p><a target="_blank" ng-href="{{projectItem.url}}">{{projectItem.description}}</a></p>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@
   <div class="row">
     <div class="large-12 columns">
       <hr>
-      <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
+
     </div>
   </div>
 </div>

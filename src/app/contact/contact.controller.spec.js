@@ -3,7 +3,7 @@
 describe('controllers', function(){
   var scope;
 
-  beforeEach(module('translunar'));
+  beforeEach(module('Contact'));
 
   beforeEach(inject(function($rootScope) {
     scope = $rootScope.$new();

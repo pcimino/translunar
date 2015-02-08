@@ -2,7 +2,7 @@
 // Wrap with Immediately Invoked Function Expression (IIFE)
 // https://github.com/toddmotto/angularjs-styleguide#modules
 (function () {
-angular.module('translunar')
+angular.module('Main', [])
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       {
