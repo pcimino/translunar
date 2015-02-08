@@ -5,10 +5,7 @@
   <div class="row">
     <div class="large-12 large-text-center columns">
       <div class="panel">
-        <h1>About</h1>
-        <img src="assets/images/FullLogo_1000-sq.png" alt="I'm Yeoman"><br>
-        <p>Always a pleasure scaffolding your apps.</p>
-        <p><a class="button radius" ng-href="#">Splendid!</a></p>
+       <!-- <img src="assets/images/FullLogo_1000-sq.png" alt="Trans Lunar Designs Incorporated"><br> -->
       </div>
     </div>
   </div>
@@ -16,10 +13,8 @@
   <div class="row">
     <div class="large-4 columns" ng-repeat="clientItem in clients | orderBy:'rank'">
       <div class="th">
-        <img class="right" ng-src="assets/images/{{clientItem.logo}}" alt="{{clientItem.title}}">
         <div class="caption">
-          <h3>{{clientItem.title}}</h3>
-          <p><a ng-href="{{clientItem.url}}">{{clientItem.description}}</a></p>
+          <h3><a target="_blank" ng-href="{{clientItem.url}}"><img class="center" ng-src="assets/images/{{clientItem.logo}}" alt="{{clientItem.title}}"></a></h3>
         </div>
       </div>
     </div>
