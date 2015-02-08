@@ -7,73 +7,73 @@ angular.module('Clients', [])
         'title': 'Capital One',
         'url': 'https://www.capitalone.com/',
         'description': 'Online Banking',
-        'logo': 'capitalone-logo-white.png'
+        'logo': 'client/capital-one.png'
       },
       {
         'title': 'JTE Multimedia',
         'url': 'http://jtemultimedia.com/',
         'description': 'Medical journal publications.',
-        'logo': 'jte-multimedia-header.png'
+        'logo': 'client/jte-multimedia.png'
       },
       {
         'title': 'Sanofi Aventis',
         'url': 'http://www.sanofi.us/l/us/en/index.jsp',
         'description': 'Pharmaceuticals',
-        'logo': 'Sanofi-Aventis-logo.jpg'
+        'logo': 'client/sanofi-aventis.png'
       },
       {
         'title': 'LIFE ScapeS',
         'url': 'http://life-scapes.com/',
         'description': 'Healthcare Marketing',
-        'logo': 'life-scapes.jpg'
+        'logo': 'client/life-scapes.png'
       },
       {
         'title': 'Elsevier',
         'url': 'http://www.elsevier.com/',
         'description': 'Medical Publications and Educational Materials',
-        'logo': 'elsevier.jpg'
+        'logo': 'client/elsevier.png'
       },
       {
         'title': 'Wing Span Bank',
         'url': 'http://en.wikipedia.org/wiki/Wingspan_Bank',
         'description': 'Internet Banking.',
-        'logo': 'Wingspan_Bank_Logo.png'
+        'logo': 'client/wingspan-bank.png'
       },
       {
         'title': 'ING Direct',
         'url': 'https://home.capitalone360.com/redirect',
         'description': 'Online Banking',
-        'logo': 'ING-Direct.gif'
+        'logo': 'client/ing-direct.png'
       },
       {
         'title': 'Juniper Bank',
         'url': 'https://www.barclaycardus.com/',
         'description': 'Online Banking & Consumer Credit',
-        'logo': 'Juniper-bank.png'
+        'logo': 'client/juniper-bank.png'
       },
       {
         'title': 'Studio Prep',
         'url': 'http://studioprep.com/#/',
         'description': 'Non-profit helping students interested in careers in design.',
-        'logo': 'studioprep.jpg'
+        'logo': 'client/studio-prep.png'
       },
       {
         'title': 'First USA',
         'url': 'http://en.wikipedia.org/wiki/Bank_One_Corporation',
         'description': 'Branded Credit Cards',
-        'logo': 'Portfolio_FirstUSA_logo_225.png'
+        'logo': 'client/first-usa.png'
       },
       {
         'title': 'Kaloke Technologies',
         'url': 'http://www.kaloke.com/home/index.htm',
         'description': 'Software Architecture',
-        'logo': 'transkaloke.gif'
+        'logo': 'client/kaloke.png'
       },
       {
         'title': 'Vertex Inc.',
         'url': 'http://vertexinc.com/',
         'description': 'Tax solution software.',
-        'logo': 'vertex-logo.jpg'
+        'logo': 'client/vertex.png'
       }
     ];
     angular.forEach($scope.clients, function(clientItem) {
