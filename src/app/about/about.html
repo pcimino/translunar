@@ -2,34 +2,25 @@
 
   <div ng-include="'components/navbar/navbar.html'"></div>
 
+  <div class="row"><br></div>
   <div class="row">
-    <div class="large-12 large-text-center columns">
-      <div class="panel">
-        <h1>About</h1>
-        <img src="assets/images/FullLogo_1000-sq.png" alt="I'm Yeoman"><br>
-        <p>Always a pleasure scaffolding your apps.</p>
-        <p><a class="button radius" ng-href="#">Splendid!</a></p>
-      </div>
+    <div class="large-2 large-text-center columns"><img src="assets/images/old-logo.png" alt="1996 Logo"></div>
+    <div class="large-8 large-text-center columns">
+      <h2>About our company</h2>
     </div>
+    <div class="large-2 large-text-center columns"><img src="assets/images/logo-1000-square.png" alt="2010 Logo"></div>
   </div>
 
-  <div class="row">
-    <div class="large-4 columns" ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'">
-      <div class="th">
-        <img class="right" ng-src="assets/images/{{awesomeThing.logo}}" alt="{{awesomeThing.title}}">
-        <div class="caption">
-          <h3>{{awesomeThing.title}}</h3>
-          <p>{{awesomeThing.description}}</p>
-          <p><a ng-href="{{awesomeThing.url}}">{{awesomeThing.url}}</a></p>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <hr>
-      <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
+  <div class="row large-12 columns">
+    <div class="large-push-4 large-8 large-text-left columns">
+      <p>Founded in 1996, Trans Lunar Designs Incorporated started out as a simple software development contracting firm. Most of our work was, and continues to be, in the Retail Financial services industry. Other clients have been in sectors such as pharamceutical, healthcare marketing and medical publications.</p>
+      <p>In 2000 we started working with small clients and providing full services from business consulting to delivering full stack IT solutions and e-commerce sites. Relationships with <b>Instant Money Order</b> and <b>Pick A Pony</b> were quickly followed by Sanofi-Aventis, Vertex Tax Solutions and JTE Multimedia.</p>
+      <p>In 2007 Agile experience became integral with our solution offerings and can now have a certified Scrum Master on staff.</p>
+      <p>Today Trans Lunar Designs continues in the tradition of boutique firms, providing software architecture, software development and IT management consulting services.</p>
     </div>
   </div>
+</div>
+<div class="container">
+  <div ng-include="'components/footer/footer.html'"></div>
 </div>

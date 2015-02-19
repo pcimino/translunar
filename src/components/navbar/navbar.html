@@ -2,15 +2,10 @@
 
   <section class="top-bar-section">
     <ul class="right">
-      <li class="active"><a ng-href="#/home">Home</a></li>
-      <li><a ng-href="#/about">About</a></li>
-      <li><a ng-href="#/clients">Clients</a></li>
-      <li><a ng-href="#/projects">Projects</a></li>
-      <li><a ng-href="#/contact">Contact</a></li>
-    </ul>
-    <ul class="left">
-      <li><img class="logo"  src="assets/images/logo-50px.png" alt="Trans Lunar Designs Incorporated">
+      <li ng-class="navClass('{{navItem.path}}')" ng-repeat="navItem in nav">
+        <a ng-href="{{navItem.path}}">{{navItem.desc}}</a>
       </li>
     </ul>
+
   </section>
 </nav>

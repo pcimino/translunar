@@ -9,14 +9,11 @@ describe('controllers', function(){
     scope = $rootScope.$new();
   }));
 
-  it('should define more than 5 awesome things', inject(function($controller) {
-    expect(scope.awesomeThings).toBeUndefined();
-
-    $controller('AboutCtrl', {
+  it('should be defined', inject(function($controller) {
+    var controller = $controller('AboutCtrl', {
       $scope: scope
     });
+    expect(controller).toBeDefined();
 
-    expect(angular.isArray(scope.awesomeThings)).toBeTruthy();
-    expect(scope.awesomeThings.length > 2).toBeTruthy();
   }));
 });
