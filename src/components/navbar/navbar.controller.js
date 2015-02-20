@@ -9,12 +9,14 @@ angular.module('translunar')
       {path:'#/projects', desc:'Projects'},
       {path:'#/contact', desc:'Contact'},
     ];
-    $scope.navClass = function(page) {
-      var currentRoute = $location.path().substring(1) || 'home';
-      var page = currentRoute ? 'active' : '';
-      console.log('AAAA ' + page +":" + currentRoute +":"+$location.path().substring(1)+":"+page);
 
-      return page;
+    // http://coder1.com/articles/angularjs-managing-active-nav-elements
+    // http://jsfiddle.net/uDPHL/146/
+    $scope.isActive = function(navItem) {
+      var currentRoute = $location.path().substring(1) || $scope.nav[0].path.substring(2);
+      var pathIndex = navItem.path.indexOf(currentRoute);
+
+      return pathIndex > 0 ? 'active' : '';
     };
   });
 })();
