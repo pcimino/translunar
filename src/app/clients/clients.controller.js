@@ -28,12 +28,6 @@ angular.module('Clients', [])
         'logo': 'client/life-scapes.png'
       },
       {
-        'title': 'Elsevier',
-        'url': 'http://www.elsevier.com/',
-        'description': 'Medical Publications and Educational Materials',
-        'logo': 'client/elsevier.png'
-      },
-      {
         'title': 'Wing Span Bank',
         'url': 'http://en.wikipedia.org/wiki/Wingspan_Bank',
         'description': 'Internet Banking.',
@@ -74,6 +68,12 @@ angular.module('Clients', [])
         'url': 'http://vertexinc.com/',
         'description': 'Tax solution software.',
         'logo': 'client/vertex.png'
+      },
+      {
+        'title': 'Elsevier',
+        'url': 'http://www.elsevier.com/',
+        'description': 'Medical Publications and Educational Materials',
+        'logo': 'client/elsevier.png'
       }
     ];
     angular.forEach($scope.clients, function(clientItem) {
