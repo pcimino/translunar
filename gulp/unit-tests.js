@@ -1,35 +1,36 @@
-'use strict';
+module.exports = function(gulp, runSequence, config) {
+  'use strict';
 
-var gulp = require('gulp');
 
-var $ = require('gulp-load-plugins')();
-
-var wiredep = require('wiredep');
-
-var paths = gulp.paths;
-
-function runTests (singleRun, done) {
-  var bowerDeps = wiredep({
-    directory: 'bower_components',
-    exclude: ['bootstrap-sass-official'],
-    dependencies: true,
-    devDependencies: true
+  gulp.task('test', function(callback) {
+    runSequence('clean-coverage', 'test-changes', callback);
   });
 
-  var testFiles = bowerDeps.js.concat([
-    paths.src + '/{app,components}/**/*.js'
-  ]);
+  gulp.task('test-changes', function() {
+    var testFiles = [];
+    testFiles = testFiles.concat(config.JS_TEST_SRC);
 
-  gulp.src(testFiles)
-    .pipe($.karma({
-      configFile: 'karma.conf.js',
-      action: (singleRun)? 'run': 'watch'
-    }))
-    .on('error', function (err) {
-      // Make sure failed tests cause gulp to exit non-zero
-      throw err;
-    });
-}
+    // first time through run all tests, next time, only run the changed tests for changed files
+    if (config.karmaTestFiles && config.karmaTestFiles.length > 0) {
+      testFiles = testFiles.concat(config.karmaTestFiles);
+    } else {
+      testFiles = testFiles.concat(config.JS_TESTS);
+    }
 
-gulp.task('test', function (done) { runTests(true /* singleRun */, done) });
-gulp.task('test:auto', function (done) { runTests(false /* singleRun */, done) });
+    console.log('testing ' + JSON.stringify(testFiles, null, 2));
+    return gulp.src(testFiles)
+      .pipe(config.$.karma({
+        configFile: config.karmaConfig,
+        singleRun: true,
+        pkg:config.pkg
+      }))
+      .on('error', function(err) {
+        // Make sure failed tests cause gulp to exit non-zero
+        throw err;
+      }).on('end', function() {
+        // clean up the temp store
+        config.karmaTestFiles = [];
+      });
+  });
+
+};

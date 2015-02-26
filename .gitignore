@@ -2,5 +2,9 @@ node_modules/
 bower_components/
 .sass-cache/
 .tmp/
+tmp/
+gulp.bak/
+build/
+test/
 dist/
 .idea

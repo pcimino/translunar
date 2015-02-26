@@ -2,7 +2,7 @@
 'use strict';
 (function () {
   angular.module('translunar')
-    .directive('bgImg', [function ($timeout) {
+    .directive('bgImg', [function () {
   return {
     'restrict': 'A',
     'scope': true,
@@ -22,12 +22,13 @@
           if (attrs.bgSrc) {
             imageSrc = attrs.bgSrc;
           } else {
+            /* jshint ignore:start */
             $scope.imagesArr = eval(attrs.bgSrcArray);
+            /* jshint ignore:end */
             imageSrc = $scope.imagesArr[$scope.currentImageId];
           }
         }
 
-        console.log(4.1 + ":" + imageSrc);
         element[0].style.backgroundImage =  'url(' + imageSrc + ') ';
         element[0].style.backgroundRepeat = attrs.bgRepeat;
         element[0].style.backgroundSize = attrs.bgSize;
@@ -39,7 +40,6 @@
         } else {
           $scope.maxOpacity = opacity;
         }
-        console.log(4 + ":" + opacity);
       };
 
       $scope.setBg($scope.currentOpacity);
@@ -78,7 +78,7 @@
         }
         console.log(14);
    //     $scope.setBg($scope.currentOpacity);
-      }
+      };
 
       $scope.setOpacity = function(opacity) {
         console.log(91);
@@ -90,7 +90,7 @@
         console.log(94);
         element[0].style.filter ='alpha(opacity=' + filterVal +')';
         console.log(95);
-      }
+      };
 
   //    $timeout($scope.updateImage(), 5000);
     }

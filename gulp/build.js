@@ -1,86 +1,133 @@
-'use strict';
+/**
+ * build.js contains all the assembly tasks, these are fairly straight forward. Most of the tasks are
+ * independent. The exceptions are the script-seq/script-seq-raw are responsible for running the
+ * test, jshint and concatentation of the JavaScript files
+ *
+ * To see how the files tie the tasks together (almost in sequence, some non-linear dependencies)
+ * - build.js
+ *     - orchestrator.js
+ *         - watch.js
+ *         - build.js
+ *             - cleanup.js
+ *             - revision.js
+ *             - unit-tests.js
+ *
+ * TBD: e2e-tests.js
+ */
+module.exports = function(gulp, runSequence, config) {
+  'use strict';
 
-var gulp = require('gulp');
+  //var htmlBanner = '<!--' + config.banner.join('\n') + '\n-->\n\n';
+  var htmlBanner ='';
+  var jsBanner = '/**\n* ' + config.banner.join('\n* ') + '\n*/\n\n';
 
-var paths = gulp.paths;
+  /* jshint ignore:start */
+  function handleError(err) {
+    this.emit('end');
+    var error = err.toString();
+    console.log(error);
+  }
+  /* jshint ignore:end */
 
-var $ = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
-});
+  // dummy minify: Just copies the images, currently does NOT optimize them, see below
+  gulp.task('image-min', function () {
+    return gulp.src(config.IMAGE_SRC)
+      .pipe(config.$.changed(config.IMAGE_SRC))
+      .pipe(gulp.dest(config.BUILD + 'images'))
+      .pipe(config.$.size());
+  });
 
-gulp.task('partials', function () {
-  return gulp.src([
-    paths.src + '/{app,components}/**/*.html',
-    paths.tmp + '/{app,components}/**/*.html'
-  ])
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true
-    }))
-    .pipe($.angularTemplatecache('templateCacheHtml.js', {
-      module: 'translunar'
-    }))
-    .pipe(gulp.dest(paths.tmp + '/partials/'));
-});
+  /* Nice to have, but not critical since this site doesn't have tons of big images
+   * For some reason these plugins fail silently (only need one or the other)
+   * To try them out, need to install the plugins first:
+   > npm install --save-dev gulp-image-optimization gulp-imagemin
+   * probably take a while to install since the job may have to compile binaries,
+   * might be the issue if the binaries aren't building on the Linux box properly
+   *
+   gulp.task('image-min-broken-on-linux', function () {
+   return gulp.src(config.IMAGE_SRC)
+   .pipe(config.$.cache(config.$.imagemin({
+   optimizationLevel: 3,
+   progressive: true,
+   interlaced: false
+   })))
+   .pipe(gulp.dest(config.BUILD + 'images')).on('error', handleError)
+   .pipe(config.$.size());
+   });
 
-gulp.task('html', ['inject', 'partials'], function () {
-  var partialsInjectFile = gulp.src(paths.tmp + '/partials/templateCacheHtml.js', { read: false });
-  var partialsInjectOptions = {
-    starttag: '<!-- inject:partials -->',
-    ignorePath: paths.tmp + '/partials',
-    addRootSlash: false
-  };
+   gulp.task('image-min-also-broken-on-linux', function () {
+   return gulp.src(config.IMAGE_SRC)
+   .pipe(config.$.cache(config.$.imageOptimization({
+   optimizationLevel: 3,
+   progressive: true,
+   interlaced: true
+   })))
+   .pipe(gulp.dest(config.BUILD + 'images')).on('error', handleError)
+   .pipe(config.$.size());
+   });
 
-  var htmlFilter = $.filter('*.html');
-  var jsFilter = $.filter('**/*.js');
-  var cssFilter = $.filter('**/*.css');
-  var assets;
+   */
 
-  return gulp.src(paths.tmp + '/serve/*.html')
-    .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-    .pipe(assets = $.useref.assets())
-    .pipe($.rev())
-    .pipe(jsFilter)
-    .pipe($.ngAnnotate())
-    .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
-    .pipe(jsFilter.restore())
-    .pipe(cssFilter)
-    .pipe($.csso())
-    .pipe(cssFilter.restore())
-    .pipe(assets.restore())
-    .pipe($.useref())
-    .pipe($.revReplace())
-    .pipe(htmlFilter)
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true
-    }))
-    .pipe(htmlFilter.restore())
-    .pipe(gulp.dest(paths.dist + '/'))
-    .pipe($.size({ title: paths.dist + '/', showFiles: true }));
-});
+  // Build HTML
+  gulp.task('html-page', function() {
+    var assets = config.$.useref.assets();
+    var sources = gulp.src(config.JS_SRC, {read: false});
+    return gulp.src(config.HTML_SRC)
+      .pipe(config.$.changed(config.HTML_SRC))
+      .pipe(config.$.if(config.rawFlag, config.$.replace(/\.min\.js*/ig, '.js')))
+      .pipe(config.$.inject(sources))
+      .pipe(config.$.replace('@@BUILD_TIME_STAMP@@', config.pkg.name + ' - v' + config.pkg.version + ' - ' + new Date()))
+      .pipe(config.$.header(htmlBanner, { pkg : config.pkg } ))
+      .pipe(assets)
+      .pipe(assets.restore())
+      .pipe(config.$.useref())
+      .pipe(gulp.dest(config.BUILD))
+      .pipe(config.$.size());
+  });
 
-gulp.task('images', function () {
-  return gulp.src(paths.src + '/assets/images/**/*')
-    .pipe(gulp.dest(paths.dist + '/assets/images/'));
-});
+  // JS Hint
+  gulp.task('jshint', function() {
+    return gulp.src(config.JS_HINT)
+      .pipe(config.$.jshint())
+      .pipe(config.$.jshint.reporter('jshint-stylish'))
+      .pipe(config.$.jshint.reporter('fail'))
+      .pipe(config.$.size());
+  });
 
-gulp.task('fonts', function () {
-  return gulp.src($.mainBowerFiles())
-    .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
-    .pipe($.flatten())
-    .pipe(gulp.dest(paths.dist + '/fonts/'));
-});
 
-gulp.task('misc', function () {
-  return gulp.src(paths.src + '/**/*.ico')
-    .pipe(gulp.dest(paths.dist + '/'));
-});
+  // JS concat, strip debugging and (if !config.rawFla) uglify and gminify
+  gulp.task('process-scripts', function() {
+    return gulp.src(config.JS_SRC)
+      .pipe(config.$.if(config.rawFlag, config.$.concat(config.appTarget, {newLine: ';'})))
+      .pipe(config.$.if(!config.rawFlag, config.$.concat(config.appTargetMin, {newLine: ';'})))
+      .pipe(config.$.if(!config.rawFlag, config.$.stripDebug()))
+      .pipe(config.$.ngAnnotate({
+        // true helps add where @ngInject is not used. It infers.
+        // Doesn't work with resolve, so we must be explicit there
+        add: true
+      }))
+      .pipe(config.$.if(!config.rawFlag, config.$.uglify({mangle:false})))
+      .pipe(config.$.header(jsBanner, { pkg : config.pkg } ))
+      .pipe(gulp.dest(config.BUILD))
+      .pipe(config.$.size());
+  });
 
-gulp.task('clean', function (done) {
-  $.del([paths.dist + '/', paths.tmp + '/'], done);
-});
+  gulp.task('scripts-sequence', function(callback) {
+    runSequence(['test', 'jshint', 'process-scripts'], callback);
+  });
 
-gulp.task('build', ['html', 'images', 'fonts', 'misc']);
+  gulp.task('copy-bower', function () {
+    // copy both .js and .js.map files
+    return gulp.src(config.BOWER_MAPS)
+      .pipe(config.$.flatten())
+      .pipe(gulp.dest(config.BUILD))
+      .pipe(config.$.size());
+  });
+
+  gulp.task('copy-ico', function () {
+    return gulp.src(config.SRC + '**/*.ico')
+      .pipe(gulp.dest(config.TARGET))
+      .pipe(config.$.size());
+  });
+
+};

@@ -1,20 +1,15 @@
-'use strict';
-
-var gulp = require('gulp');
-
-var paths = gulp.paths;
+module.exports = function(gulp, runSequence, config) {
+  'use strict';
 
 var util = require('util');
-
 var browserSync = require('browser-sync');
-
 var middleware = require('./proxy');
 
 function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
 
   var routes = null;
-  if(baseDir === paths.src || (util.isArray(baseDir) && baseDir.indexOf(paths.src) !== -1)) {
+  if(baseDir === config.SRC || (util.isArray(baseDir) && baseDir.indexOf(config.SRC) !== -1)) {
     routes = {
       '/bower_components': 'bower_components'
     };
@@ -33,26 +28,28 @@ function browserSyncInit(baseDir, files, browser) {
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([
-    paths.tmp + '/serve',
-    paths.src
+    config.TMP + '/serve',
+    config.SRC
   ], [
-    paths.tmp + '/serve/{app,components}/**/*.css',
-    paths.src + '/{app,components}/**/*.js',
-    paths.src + 'src/assets/images/**/*',
-    paths.tmp + '/serve/*.html',
-    paths.tmp + '/serve/{app,components}/**/*.html',
-    paths.src + '/{app,components}/**/*.html'
+    config.TMP + '/serve/{app,components}/**/*.css',
+    config.SRC + '/{app,components}/**/*.js',
+    config.SRC + 'src/assets/images/**/*',
+    config.TMP + '/serve/*.html',
+    config.TMP + '/serve/{app,components}/**/*.html',
+    config.SRC + '/{app,components}/**/*.html'
   ]);
 });
 
 gulp.task('serve:dist', ['build'], function () {
-  browserSyncInit(paths.dist);
+  browserSyncInit(config.DIST);
 });
 
 gulp.task('serve:e2e', ['inject'], function () {
-  browserSyncInit([paths.tmp + '/serve', paths.src], null, []);
+  browserSyncInit([config.TMP + '/serve', config.SRC], null, []);
 });
 
 gulp.task('serve:e2e-dist', ['build'], function () {
-  browserSyncInit(paths.dist, null, []);
+  browserSyncInit(config.DIST, null, []);
 });
+
+};

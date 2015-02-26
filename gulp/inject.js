@@ -1,40 +1,37 @@
-'use strict';
+module.exports = function(gulp, runSequence, config) {
+  'use strict';
 
-var gulp = require('gulp');
+  var wiredep = require('wiredep').stream;
 
-var paths = gulp.paths;
+  gulp.task('inject', ['styles'], function () {
 
-var $ = require('gulp-load-plugins')();
+    var injectStyles = gulp.src([
+      config.TMP + '/serve/{app,components}/**/*.css',
+      '!' + config.TMP + '/serve/app/vendor.css'
+    ], { read: false });
 
-var wiredep = require('wiredep').stream;
+    var injectScripts = gulp.src([
+      config.SRC + '/{app,components}/**/*.js',
+      '!' + config.SRC + '/{app,components}/**/*.spec.js',
+      '!' + config.SRC + '/{app,components}/**/*.mock.js'
+    ]).pipe(config.$.angularFilesort());
 
-gulp.task('inject', ['styles'], function () {
+    var injectOptions = {
+      ignorePath: [config.SRC, config.TMP + '/serve'],
+      addRootSlash: false
+    };
 
-  var injectStyles = gulp.src([
-    paths.tmp + '/serve/{app,components}/**/*.css',
-    '!' + paths.tmp + '/serve/app/vendor.css'
-  ], { read: false });
+    var wiredepOptions = {
+      directory: 'bower_components',
+      exclude: [/foundation\.js/, /foundation\.css/, /bootstrap\.css/, /foundation\.css/]
+    };
 
-  var injectScripts = gulp.src([
-    paths.src + '/{app,components}/**/*.js',
-    '!' + paths.src + '/{app,components}/**/*.spec.js',
-    '!' + paths.src + '/{app,components}/**/*.mock.js'
-  ]).pipe($.angularFilesort());
+    return gulp.src(config.SRC + '/*.html')
+      .pipe(config.$.inject(injectStyles, injectOptions))
+      .pipe(config.$.inject(injectScripts, injectOptions))
+      .pipe(wiredep(wiredepOptions))
+      .pipe(gulp.dest(config.TMP + '/serve'));
 
-  var injectOptions = {
-    ignorePath: [paths.src, paths.tmp + '/serve'],
-    addRootSlash: false
-  };
+  });
 
-  var wiredepOptions = {
-    directory: 'bower_components',
-    exclude: [/foundation\.js/, /foundation\.css/, /bootstrap\.css/, /foundation\.css/]
-  };
-
-  return gulp.src(paths.src + '/*.html')
-    .pipe($.inject(injectStyles, injectOptions))
-    .pipe($.inject(injectScripts, injectOptions))
-    .pipe(wiredep(wiredepOptions))
-    .pipe(gulp.dest(paths.tmp + '/serve'));
-
-});
+};

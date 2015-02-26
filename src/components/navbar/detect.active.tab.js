@@ -10,6 +10,9 @@
   return {
     link: function postLink(scope, element, attrs) {
       scope.$on('$stateChangeSuccess', function (event, current, previous) {
+        console.log('AAAAAAA ' + event);
+        console.log('bbbbbbb ' + current);
+        console.log('ccccccc ' + previous);
         /*
          Designed for full re-usability at any path, any level, by using
          data from attrs. Declare like this:

@@ -1,7 +1,7 @@
 'use strict';
 (function () {
 angular.module('About', [])
-  .controller('AboutCtrl', function ($scope) {
+  .controller('AboutCtrl', function () {
 
   });
 })();
