@@ -5,6 +5,5 @@ bower_components/
 tmp/
 gulp.bak/
 build/
-test/
 dist/
 .idea
