@@ -19,6 +19,8 @@ var config = {
   pkg:pkg,
   appTargetMin:pkg.name + '.app.min.js',
   appTarget:pkg.name + '.app.js',
+  vendorTargetMin:pkg.name + '.lib.min.js',
+  vendorTarget:pkg.name + '.lib.js',
   HTML_SRC:SRC + '**/*.html',
   SRC: SRC,
   TMP:'tmp',
@@ -31,7 +33,8 @@ var config = {
   rawFlag:false, // default to minify
   watchFlag:false, // default to run once
   BOWER_COMPONENTS:'bower_components/**/*.{eot,svg,ttf,woff}',
-  BOWER_MAPS:['bower_components/**/*.min.js.map'],
+  BOWER_MIN:['bower_components/**/*.min.js*'],
+  BOWER_RAW:['bower_components/**/*.js', '!bower_components/**/*.min.js', '!bower_components/**/src/**/*'],
   IMAGE_SRC:SRC + '/assets/images/**/*',
   CSS_SRC:[SRC + '/**/*', '!' + SRC + '/scss/**/*'],
   SASS_SRC:SRC + '/scss/**/*',
@@ -44,7 +47,8 @@ var config = {
     ' @version v<%= pkg.version %>',
     ' @copyright <%= pkg.licenses.copyright %>',
     ' @url <%= pkg.licenses.url %>'],
-  JS_SRC:[SRC + 'config/GlobalConfig.js', SRC + 'app/index.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*'],
+  JS_SRC:[SRC + 'app/index.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*'],
+  JS_LIB:[BUILD + 'lib/**/*.js'],
   JS_HINT:['gulpfile.js', 'gulp/*.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*.js'],
   JS_TEST_SRC: [
     'bower_components/jq*/**/*.min.js',
@@ -70,6 +74,7 @@ config.handleError = function(err) {
 // load script files
 var orchestratorTasks = require('./gulp/orchestrator');
 var buildTasks = require('./gulp/build');
+var bowerTasks = require('./gulp/build-bower');
 var cleanupTasks = require('./gulp/cleanup');
 var revisionTasks = require('./gulp/revision');
 var watchTasks = require('./gulp/watch');
@@ -86,6 +91,7 @@ var runSequence = require('run-sequence').use(gulp);
 //initialize script paths
 orchestratorTasks(gulp, runSequence, config);
 buildTasks(gulp, runSequence, config);
+bowerTasks(gulp, runSequence, config);
 cleanupTasks(gulp, runSequence, config);
 stylesTasks(gulp, runSequence, config);
 watchTasks(gulp, runSequence, config);

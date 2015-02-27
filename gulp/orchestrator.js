@@ -15,7 +15,7 @@ module.exports = function(gulp, runSequence, config) {
 
   // Build core
   gulp.task('build-core', function(callback) {
-    runSequence('clean', ['image-min', 'copy-bower', 'styles-sass', 'styles-app', 'fonts', 'copy-ico'],
+    runSequence('clean', ['image-min', 'styles-sass', 'styles-app', 'fonts', 'copy-ico', 'html-page'],
       callback);
   });
 

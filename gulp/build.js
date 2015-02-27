@@ -70,6 +70,7 @@ module.exports = function(gulp, runSequence, config) {
 
   // Build HTML
   gulp.task('html-page', function() {
+    config.rawFlag=true;
     var assets = config.$.useref.assets();
     var sources = gulp.src(config.JS_SRC, {read: false});
     return gulp.src(config.HTML_SRC)
@@ -114,14 +115,6 @@ module.exports = function(gulp, runSequence, config) {
 
   gulp.task('scripts-sequence', function(callback) {
     runSequence(['test', 'jshint', 'process-scripts'], callback);
-  });
-
-  gulp.task('copy-bower', function () {
-    // copy both .js and .js.map files
-    return gulp.src(config.BOWER_MAPS)
-      .pipe(config.$.flatten())
-      .pipe(gulp.dest(config.BUILD))
-      .pipe(config.$.size());
   });
 
   gulp.task('copy-ico', function () {

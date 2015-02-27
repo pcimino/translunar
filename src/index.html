@@ -37,19 +37,14 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
 
-    <!-- build:js(src) scripts/vendor.js -->
-    <!-- bower:js -->
-    <!-- run `gulp wiredep` to automaticaly populate bower script dependencies -->
-    <!-- endbower -->
+    <!-- build:js translunar.lib.min.js -->
+    <!-- inject:js -->
+    <!-- endinject -->
     <!-- endbuild -->
 
-    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
-    <!-- inject:js -->
-    <!-- js files will be automaticaly insert here -->
-    <!-- endinject -->
 
-    <!-- inject:partials -->
-    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- build:js translunar.app.min.js -->
+    <!-- inject:js -->
     <!-- endinject -->
     <!-- endbuild -->
 

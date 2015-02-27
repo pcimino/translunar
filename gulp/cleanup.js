@@ -11,6 +11,9 @@ module.exports = function(gulp, runSequence, config) {
   gulp.task('clean-coverage', function (done) {
     return config.del([config.TMP + '/', config.DIST + '/', config.COVERAGE + '/'], done);
   });
+  gulp.task('clean-bower-lib', function (done) {
+    return config.del([config.BUILD + 'lib/'], done);
+  });
   /** End Cleanup */
 
 };
