@@ -52,8 +52,6 @@ module.exports = function(config, specificOptions, browserList) {
       'karma-jasmine',
       'karma-coverage',
       'karma-phantomjs-launcher',
-      'karma-chrome-launcher',
-      'karma-firefox-launcher',
       'karma-sourcemap-loader',
       'karma-ng-html2js-preprocessor'
     ],

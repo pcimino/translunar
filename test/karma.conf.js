@@ -1,7 +1,7 @@
 var sharedConfig = require('./karma-shared.conf');
 
 module.exports = function(config) {
-  sharedConfig(config, {testName: 'App: build tests', logFile: 'karma-docs.log'}, ['PhantomJS']);
+  sharedConfig(config, {testName: 'Karma Tests', logFile: 'karma-docs.log'}, ['PhantomJS']);
 
   config.set({
 

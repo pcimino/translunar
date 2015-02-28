@@ -1,7 +1,7 @@
 var sharedConfig = require('./karma-shared.conf');
 
 module.exports = function(config) {
-  sharedConfig(config, {testName: config.pkg.name + ': build tests', logFile: 'karma-docs.log'}, ['Chrome', 'Firefox']);
+  sharedConfig(config, {testName: 'Debug tests', logFile: 'karma-docs.log'}, ['Chrome', 'Firefox']);
 
   config.set({
 

@@ -2,7 +2,7 @@ var sharedConfig = require('./karma-shared.conf');
 
 module.exports = function(config) {
     'use strict';
-    sharedConfig(config, {testName: 'APP build tests', logFile: 'karma-docs.log'}, ['PhantomJS']);
+    sharedConfig(config, {testName: 'Quiet Tests', logFile: 'karma-docs.log'}, ['PhantomJS']);
 
     config.set({
         // level of logging
