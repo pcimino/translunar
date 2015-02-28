@@ -18,7 +18,7 @@ module.exports = function(gulp, runSequence, config) {
   gulp.task('styles-sass', function() {
     var filterCSS = config.$.filter('**/*.css');
     return gulp.src(config.SASS_SRC)
-      .pipe(config.$.rubySass({ style: 'expanded', 'sourcemap=none': true }))
+      .pipe(config.$.rubySass({ style: 'expanded'}))
       // Filters only css files before auto prefixing
       .pipe(filterCSS)
       .pipe(config.$.autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1'))
@@ -28,6 +28,7 @@ module.exports = function(gulp, runSequence, config) {
       .pipe(config.$.size());
   });
 
+  /*
   // Copy CSS Section
   gulp.task('styles-app',  function () {
     return gulp.src(config.CSS_SRC)
@@ -35,5 +36,5 @@ module.exports = function(gulp, runSequence, config) {
       .pipe(gulp.dest(config.BUILD + 'css'))
       .pipe(config.$.size());
   });
-
+*/
 };

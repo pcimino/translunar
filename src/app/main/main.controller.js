@@ -4,44 +4,44 @@
 (function () {
 angular.module('Main', [])
   .controller('MainCtrl', function ($scope) {
-    var basePath = 'assets/images/background/';
+    var basePath = '';
     $scope.backgrounds = [];
     $scope.awesomeThings = [
       {
         'title': '',
         'url': '',
         'description': '',
-        'logo': 'armstrong-siddley-turbojet.jpg'
+        'logo': 'assets/images/background/armstrong-siddley-turbojet.jpg'
       },
       {
         'title': '',
         'url': '',
         'description': '',
-        'logo': 'armstrong-siddley-rocket.jpg'
+        'logo': 'assets/images/background/armstrong-siddley-rocket.jpg'
       },
       {
         'title': '',
         'url': '',
         'description': '',
-        'logo': 'bristol-olympus-turbojet.jpg'
+        'logo': 'assets/images/background/bristol-olympus-turbojet.jpg'
       },
       {
         'title': '',
         'url': '',
         'description': '',
-        'logo': 'bristol-pegasus.jpg'
+        'logo': 'assets/images/background/bristol-pegasus.jpg'
       },
       {
         'title': '',
         'url': '',
         'description': '',
-        'logo': 'merlin.jpg'
+        'logo': 'assets/images/background/merlin.jpg'
       },
       {
         'title': '',
         'url': '',
         'description': '',
-        'logo': 'wright-flyer.jpg'
+        'logo': 'assets/images/background/wright-flyer.jpg'
       }
 
     ];

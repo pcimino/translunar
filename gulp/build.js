@@ -33,7 +33,7 @@ module.exports = function(gulp, runSequence, config) {
   gulp.task('image-min', function () {
     return gulp.src(config.IMAGE_SRC)
       .pipe(config.$.changed(config.IMAGE_SRC))
-      .pipe(gulp.dest(config.BUILD + 'images'))
+      .pipe(gulp.dest(config.BUILD + 'assets'))
       .pipe(config.$.size());
   });
 

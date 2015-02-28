@@ -25,6 +25,7 @@
     "gulp-changed": "^1.1.1",
     "gulp-concat": "^2.5.2",
     "gulp-csso": "^1.0.0",
+    "gulp-debug": "^2.0.1",
     "gulp-filter": "^2.0.2",
     "gulp-flatten": "0.0.4",
     "gulp-header": "^1.2.2",

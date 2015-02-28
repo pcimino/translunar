@@ -1,7 +1,7 @@
 /**
  * orchestrator.js links tasks in sequence
  */
-module.exports = function(gulp) {
+module.exports = function(gulp, runSequence) {
   'use strict';
 
   var pkg = require('../package.json');
@@ -12,9 +12,12 @@ module.exports = function(gulp) {
     lazy: true
   });
   var SRC = 'src/';
+  var NOT_SRC = '!src/';
   var BUILD = 'build/';
   var NOT_BUILD = '!build/';
-  var NOT_SRC = '!src/';
+
+  var BOWER = 'bower_components/';
+  var NOT_BOWER = '!bower_components/';
 
   var config = {
     $:dollar,
@@ -35,10 +38,24 @@ module.exports = function(gulp) {
     E2E: 'test/e2e',
     rawFlag:false, // default to minify
     watchFlag:false, // default to run once
-    BOWER_COMPONENTS:'bower_components/**/*.{eot,svg,ttf,woff}',
-    BOWER_MIN:['bower_components/**/*.min.js*'],
-    BOWER_RAW:['bower_components/**/*.js', '!bower_components/**/*.min.js', '!bower_components/**/src/**/*'],
-    IMAGE_SRC:SRC + '/assets/images/**/*',
+    BOWER_COMPONENTS:BOWER + '**/*.{eot,svg,ttf,woff}',
+    BOWER_MIN:[
+      BOWER + '**/*.min.js*',
+      NOT_BOWER + '**/*mock*.js',
+      NOT_BOWER + 'foundation/js/foundation/*',
+      NOT_BOWER + 'foundation/js/vendor/*',
+      NOT_BOWER + 'modernizr/{feature-detects,media,test}/*',
+      NOT_BOWER + '**/*.gzip'
+    ],
+    BOWER_RAW:[
+      BOWER + '**/*.js', NOT_BOWER + '**/*.min.js',
+      NOT_BOWER + '**/*mock*.js',
+      NOT_BOWER + 'foundation/js/foundation/*',
+      NOT_BOWER + 'foundation/js/vendor/*',
+      NOT_BOWER + 'modernizr/{feature-detects,media,test}/*',
+      NOT_BOWER + '**/*.gzip'
+    ],
+    IMAGE_SRC:SRC + '/assets/**/*',
     CSS_SRC:[SRC + '/**/*', '!' + SRC + '/scss/**/*'],
     SASS_SRC:SRC + '/scss/**/*',
     TYPE_FACES: SRC + '/typefaces/**/*',
@@ -50,23 +67,35 @@ module.exports = function(gulp) {
       ' @version v<%= pkg.version %>',
       ' @copyright <%= pkg.licenses.copyright %>',
       ' @url <%= pkg.licenses.url %>'],
-    JS_SRC:[SRC + 'app/index.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*'],
-    JS_LIB:[BUILD + 'lib/**/*.js'],
+    JS_SRC:[SRC + 'app/index.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*', NOT_SRC + '**/*.spec.js'],
+    JS_LIB:[
+      BUILD + 'lib/**/angular.*.js',
+      '!' + BUILD + 'lib/**/angular-mocks*.js',
+      BUILD + 'lib/**/angular-cookies*.js',
+      BUILD + 'lib/**/angular-sanitize*.js',
+      BUILD + 'lib/**/angular-ui-router*.js',
+      BUILD + 'lib/**/jquery*.js',
+      BUILD + 'lib/**/modernizr*.js',
+      BUILD + 'lib/**/sizzle*.js',
+      BUILD + 'lib/**/foundation*.js',
+      BUILD + 'lib/**/angular*.js',
+      BUILD + 'lib/**/*.js'
+    ],
     JS_HINT:['gulpfile.js', 'gulp/*.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*.js'],
     JS_TEST_SRC: [
-      'bower_components/jq*/**/*.min.js',
-      'bower_components/angular/**/*.min.js',
-      'bower_components/angular-ui-router/**/*.min.js',
-      'bower_components/angular-animate/**/*.min.js',
-      'bower_components/angular-cookies/**/*.min.js',
-      'bower_components/angular-foundation/**/*.min.js',
-      'bower_components/angular-sanitize/**/*.min.js',
-      'bower_components/angular-touch/**/*.min.js',
-      'bower_components/fastclick/**/*.min.js',
-      'bower_components/jquery.cookie/**/*.min.js',
-      'bower_components/jquery-placeholder/**/*.min.js',
-      'bower_components/modernizr/**/*.min.js',
-      'bower_components/angular-mocks/angular-mocks.js',
+      BOWER + 'jq*/**/*.min.js',
+      BOWER + 'angular/**/*.min.js',
+      BOWER + 'angular-ui-router/**/*.min.js',
+      BOWER + 'angular-animate/**/*.min.js',
+      BOWER + 'angular-cookies/**/*.min.js',
+      BOWER + 'angular-foundation/**/*.min.js',
+      BOWER + 'angular-sanitize/**/*.min.js',
+      BOWER + 'angular-touch/**/*.min.js',
+      BOWER + 'fastclick/**/*.min.js',
+      BOWER + 'jquery.cookie/**/*.min.js',
+      BOWER + 'jquery-placeholder/**/*.min.js',
+      BOWER + 'modernizr/**/*.min.js',
+      BOWER + 'angular-mocks/angular-mocks.js',
       'test/lib/sinon/sinon-1.12.0.js',
       'src/**/*.js',
       'src/**/*.html'
@@ -89,8 +118,6 @@ module.exports = function(gulp) {
   var injectTasks = require('./inject');
   var stylesTasks = require('./styles');
 
-// setup runSequence
-  var runSequence = require('run-sequence').use(gulp);
 
 //initialize script paths
   buildTasks(gulp, runSequence, config);
@@ -113,5 +140,7 @@ module.exports = function(gulp) {
     var error = err.toString();
     console.log(error);
   };
+
+  return config;
 
 };

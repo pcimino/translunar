@@ -17,10 +17,11 @@ module.exports = function(gulp, runSequence, config) {
   // this requires changes to rules.xml to allow /login.*.html, /logout.*.html, etc
   gulp.task('revision', function () {
     return gulp.src(config.BUILD + '**/*')
-      .pipe(config.$.revAll({ ignore: ['favicon.ico', 'index.html', '.scss'] }))
+      .pipe(config.$.revAll({ ignore: ['favicon.ico', 'index.html', '.scss'] })).pipe(config.$.debug({verbose: true}))
       .pipe(gulp.dest(config.TARGET))
-      .pipe(config.$.revAll.versionFile({ fileName: 'version.json' }))
-      .pipe(gulp.dest(config.TARGET).pipe(config.$.debug({verbose: false})));
+      .pipe(config.$.size());
+   //   .pipe(config.$.revAll.versionFile({ fileName: 'version.json' }))
+     // .pipe(gulp.dest(config.TARGET));
   });
 
 
