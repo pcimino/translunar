@@ -7,25 +7,32 @@
     'restrict': 'EA',
     'scope': true,
     'link': function ($scope, element, attrs) {
-      $scope.imagesArr = undefined;
-      $scope.currentImageId = 0;
-      $scope.currentOpacity = attrs.bgMaxOpacity;
-      $scope.maxOpacity = 0.4;
-      $scope.imageDirFlag = -1;
+      var imagesArr;
+      var currentImageId = 0;
+      var currentOpacity = attrs.bgMaxOpacity;
+      var maxOpacity = attrs.bgMaxOpacity;
+      var minOpacity = attrs.bgMinOpacity;
+      var imageDirFlag = -1;
+      var animSpeedDown = 10;
+      var animSpeedUp = 100;
+      var animPause = 3000;
+      var intervalTime = animSpeedDown;
+      var animStep = 0.001;
+
       $scope.setBg = function (opacityArg) {
         console.log(1);
 
         var imageSrc;
-        if ($scope.imagesArr) {
-          imageSrc = $scope.imagesArr[$scope.currentImageId];
+        if (imagesArr) {
+          imageSrc = imagesArr[currentImageId];
         } else {
           if (attrs.bgSrc) {
             imageSrc = attrs.bgSrc;
           } else {
             /* jshint ignore:start */
-            $scope.imagesArr = eval(attrs.bgSrcArray);
+            imagesArr = eval(attrs.bgSrcArray);
             /* jshint ignore:end */
-            imageSrc = $scope.imagesArr[$scope.currentImageId];
+            imageSrc = imagesArr[currentImageId];
           }
         }
 
@@ -36,50 +43,46 @@
 
         var opacity = Number(opacityArg);
         if (undefined === opacity || isNaN(opacity)) {
-          opacity = $scope.maxOpacity;
-        } else {
-          $scope.maxOpacity = opacity;
+          opacity = maxOpacity;
+          currentOpacity = maxOpacity;
         }
       };
 
-      $scope.setBg($scope.currentOpacity);
+      $scope.setBg(currentOpacity);
 
       $scope.updateImage = function() {
-        $scope.currentOpacity = element[0].style.opacity;
-        if ($scope.imageDirFlag < 0) {
-          if ($scope.currentOpacity >= 0) {
-            console.log(7);
-            $scope.currentOpacity -= 0.1;
+        if (imageDirFlag < 0) {
+          intervalTime = animSpeedDown;
+          if (currentOpacity >= minOpacity) {
+            currentOpacity -= animStep;
           } else {
-            console.log(8);
-            $scope.imageDirFlag *= -1; // change direction
-            $scope.currentImageId++; // next image
-            if ($scope.currentImageId >= $scope.imagesArr.length) {
-              $scope.currentImageId = 0;
+            imageDirFlag *= -1; // change direction
+            currentImageId++; // next image
+            if (currentImageId >= imagesArr.length) {
+              currentImageId = 0;
             }
+            $scope.setBg(currentOpacity);
           }
         } else {
-          if ($scope.currentOpacity <= $scope.maxOpacity) {
-            $scope.currentOpacity += 0.1;
+
+          intervalTime = animSpeedUp;
+          if (currentOpacity <= maxOpacity) {
+            currentOpacity += animStep;
           } else {
-            $scope.imageDirFlag *= -1; // change direction
-            $scope.currentImageId++; // next image
-            if ($scope.currentImageId >= $scope.imagesArr.length) {
-              $scope.currentImageId = 0;
-            }
+            imageDirFlag *= -1; // change direction
+            intervalTime = animPause;
           }
         }
-   //     $scope.setBg($scope.currentOpacity);
+        $scope.setOpacity(currentOpacity);
       };
 
       $scope.setOpacity = function(opacity) {
-        $scope.setOpacity(opacity);
         element[0].style.opacity = opacity;
         var filterVal = Math.trunc(100 * opacity);
         element[0].style.filter ='alpha(opacity=' + filterVal +')';
       };
 
-      $interval($scope.updateImage(), 5000);
+      $interval($scope.updateImage, intervalTime);
     }
   };
 
