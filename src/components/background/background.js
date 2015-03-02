@@ -2,9 +2,9 @@
 'use strict';
 (function () {
   angular.module('translunar')
-    .directive('bgImg', [function () {
+    .directive('bgImg', function ($interval) {
   return {
-    'restrict': 'A',
+    'restrict': 'EA',
     'scope': true,
     'link': function ($scope, element, attrs) {
       $scope.imagesArr = undefined;
@@ -45,10 +45,8 @@
       $scope.setBg($scope.currentOpacity);
 
       $scope.updateImage = function() {
-        console.log(5);
         $scope.currentOpacity = element[0].style.opacity;
         if ($scope.imageDirFlag < 0) {
-          console.log(6);
           if ($scope.currentOpacity >= 0) {
             console.log(7);
             $scope.currentOpacity -= 0.1;
@@ -57,44 +55,33 @@
             $scope.imageDirFlag *= -1; // change direction
             $scope.currentImageId++; // next image
             if ($scope.currentImageId >= $scope.imagesArr.length) {
-              console.log(9);
               $scope.currentImageId = 0;
             }
           }
         } else {
-          console.log(10);
           if ($scope.currentOpacity <= $scope.maxOpacity) {
-            console.log(11);
             $scope.currentOpacity += 0.1;
           } else {
-            console.log(12);
             $scope.imageDirFlag *= -1; // change direction
             $scope.currentImageId++; // next image
             if ($scope.currentImageId >= $scope.imagesArr.length) {
-              console.log(13);
               $scope.currentImageId = 0;
             }
           }
         }
-        console.log(14);
    //     $scope.setBg($scope.currentOpacity);
       };
 
       $scope.setOpacity = function(opacity) {
-        console.log(91);
         $scope.setOpacity(opacity);
-        console.log(92);
         element[0].style.opacity = opacity;
-        console.log(93);
         var filterVal = Math.trunc(100 * opacity);
-        console.log(94);
         element[0].style.filter ='alpha(opacity=' + filterVal +')';
-        console.log(95);
       };
 
-  //    $timeout($scope.updateImage(), 5000);
+      $interval($scope.updateImage(), 5000);
     }
   };
 
-}]);
+});
 })();

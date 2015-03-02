@@ -4,7 +4,6 @@
 (function () {
 angular.module('Main', [])
   .controller('MainCtrl', function ($scope) {
-    var basePath = '';
     $scope.backgrounds = [];
     $scope.awesomeThings = [
       {
@@ -47,7 +46,7 @@ angular.module('Main', [])
     ];
 
     for (var i in $scope.awesomeThings) {
-      $scope.backgrounds.push(basePath + $scope.awesomeThings[i].logo);
+      $scope.backgrounds.push($scope.awesomeThings[i].logo);
     }
     angular.forEach($scope.awesomeThings, function(awesomeThing) {
       awesomeThing.rank = Math.random();
