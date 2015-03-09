@@ -34,7 +34,7 @@ module.exports = function(gulp, runSequence, config) {
     });
 
     // watch for Image changes, fonts and styles
-    gulp.watch([config.IMAGE_SRC, config.CSS_SRC, config.SASS_SRC, config.TYPE_FACES], ['image-min' , 'styles', 'styles-sass', 'fonts']);
+    gulp.watch([config.IMAGE_SRC, config.CSS_SRC, config.SASS_SRC, config.TYPE_FACES], ['image-min', 'styles-sass', 'fonts']);
 
     // watch for changes in the library directory
     gulp.watch(config.SRC + 'lib/*.js', ['copy-libraries']);

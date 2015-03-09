@@ -40,6 +40,8 @@
         element[0].style.backgroundRepeat = attrs.bgRepeat;
         element[0].style.backgroundSize = attrs.bgSize;
         element[0].style.backgroundAttachment = attrs.bgAttachment;
+        element[0].style.width = '100%';
+        element[0].style.height = 'auto';
 
         var opacity = Number(opacityArg);
         if (undefined === opacity || isNaN(opacity)) {

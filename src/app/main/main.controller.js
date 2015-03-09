@@ -7,9 +7,9 @@ angular.module('Main', [])
     $scope.backgrounds = [];
     $scope.awesomeThings = [
       {
-        'title': '',
+        'title': 'armstrong-siddley-turbojet',
         'url': '',
-        'description': '',
+        'description': 'armstrong-siddley-turbojet',
         'logo': 'assets/images/background/armstrong-siddley-turbojet.jpg'
       },
       {
@@ -31,15 +31,15 @@ angular.module('Main', [])
         'logo': 'assets/images/background/bristol-pegasus.jpg'
       },
       {
-        'title': '',
+        'title': 'merlin',
         'url': '',
-        'description': '',
+        'description': 'merlin',
         'logo': 'assets/images/background/merlin.jpg'
       },
       {
-        'title': '',
+        'title': 'wright',
         'url': '',
-        'description': '',
+        'description': 'wright',
         'logo': 'assets/images/background/wright-flyer.jpg'
       }
 

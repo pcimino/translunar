@@ -3,7 +3,7 @@ module.exports = function(gulp, runSequence, config) {
 
   var wiredep = require('wiredep').stream;
 
-  gulp.task('inject', ['styles'], function () {
+  gulp.task('inject', ['styles-sass'], function () {
 
     var injectStyles = gulp.src([
       config.TMP + '/serve/{app,components}/**/*.css',

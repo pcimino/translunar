@@ -5,18 +5,12 @@ describe('controllers', function(){
 
   beforeEach(module('Projects'));
 
-  beforeEach(inject(function($rootScope) {
-    scope = $rootScope.$new();
-  }));
+    it('should be defined', inject(function($controller) {
+      var controller = $controller('ProjectsCtrl', {
+        $scope: scope
+      });
 
-  it('should define more than 5 awesome things', inject(function($controller) {
-    expect(scope.projects).toBeUndefined();
+      expect(controller).toBeDefined();
 
-    $controller('ProjectsCtrl', {
-      $scope: scope
-    });
-
-    expect(angular.isArray(scope.projects)).toBeTruthy();
-    expect(scope.projects.length > 2).toBeTruthy();
-  }));
-});
+    }));
+  });
