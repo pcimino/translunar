@@ -1,6 +1,6 @@
 {
   "name": "translunar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Angular web site",
   "main": "node-server.js",
   "author": "Paul L. Cimino",
