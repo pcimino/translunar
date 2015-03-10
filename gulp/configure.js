@@ -71,6 +71,7 @@ module.exports = function(gulp, runSequence) {
     JS_LIB:[
       BUILD + 'lib/**/angular.*.js',
       '!' + BUILD + 'lib/**/angular-mocks*.js',
+      BUILD + 'lib/**/angular-aria*.js',
       BUILD + 'lib/**/angular-cookies*.js',
       BUILD + 'lib/**/angular-sanitize*.js',
       BUILD + 'lib/**/angular-ui-router*.js',
@@ -87,6 +88,7 @@ module.exports = function(gulp, runSequence) {
       BOWER + 'angular/**/*.min.js',
       BOWER + 'angular-ui-router/**/*.min.js',
       BOWER + 'angular-animate/**/*.min.js',
+      BOWER + 'angular-aria/**/*.min.js',
       BOWER + 'angular-cookies/**/*.min.js',
       BOWER + 'angular-foundation/**/*.min.js',
       BOWER + 'angular-sanitize/**/*.min.js',
