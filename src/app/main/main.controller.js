@@ -7,39 +7,39 @@ angular.module('Main', [])
     $scope.backgrounds = [];
     $scope.awesomeThings = [
       {
-        'title': 'Title 1',
+        'title': 'Agile Leadership',
         'url': '',
-        'description': 'description 1s',
+        'description': 'Certified Scrum Master, experienced teams.',
         'logo': 'assets/images/background/armstrong-siddley-turbojet.jpg'
       },
       {
-        'title': '',
+        'title': 'IT Management',
         'url': '',
-        'description': '',
+        'description': 'Strategy planning and resource management.',
         'logo': 'assets/images/background/armstrong-siddley-rocket.jpg'
       },
       {
-        'title': '',
+        'title': 'Dev Ops',
         'url': '',
-        'description': '',
+        'description': 'AWS, Chef, Puppet.',
         'logo': 'assets/images/background/bristol-olympus-turbojet.jpg'
       },
       {
-        'title': '',
+        'title': 'Enterprise Architecture',
         'url': '',
-        'description': '',
+        'description': 'Jav EE, Spring, ESB, RESTful API design.',
         'logo': 'assets/images/background/bristol-pegasus.jpg'
       },
       {
-        'title': '',
+        'title': 'JavaScript Frameworks',
         'url': '',
-        'description': '',
+        'description': 'AngularJS, Sencha, Enyo.',
         'logo': 'assets/images/background/merlin.jpg'
       },
       {
-        'title': '',
+        'title': 'Mobile',
         'url': '',
-        'description': '',
+        'description': 'HTML5, Cordova, PhoneGap, Responsive UI.',
         'logo': 'assets/images/background/wright-flyer.jpg'
       }
 

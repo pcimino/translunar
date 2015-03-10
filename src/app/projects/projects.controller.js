@@ -18,13 +18,13 @@ angular.module('Projects', [])
       {
         'title': 'STEM Store',
         'url': 'http://stem-store.translunardesigns.com/#/',
-        'description': 'A simple catalog, with a Responsive Mobile UI, created for a local high school student store.',
+        'description': 'Responsive Mobile UI catalog created for a local high school student store.',
         'logo': 'assets/images/projects/stem.png'
       },
       {
         'title': 'Top Watch',
         'url': 'http://tw.translunardesigns.com/#/',
-        'description': 'EnyoJS concept deployed on Firefox OS, Android, iOS, Windows Phone 7, WP 8 and Chrome Store.',
+        'description': 'EnyoJS concept deployed on Firefox OS, Android, iOS, Blackberry, Windows Phone 7, WP 8 and Chrome Store.',
         'logo': 'assets/images/projects/topwatch.png'
       },
       {

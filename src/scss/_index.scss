@@ -27,14 +27,19 @@
 
 
   img.right {
-    width:100px;
     margin-left: 15px;
     margin-right: 0px;
   }
   img.left {
-    width:100px;
     margin-left: 0px;
     margin-right: 15px;
+  }
+  img.thumb {
+    height:150px;
+  }
+
+  img.list {
+    width:100px;
   }
 
   img.center {
