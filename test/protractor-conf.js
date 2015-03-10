@@ -11,7 +11,13 @@ exports.config = {
 
   'framework': 'jasmine',
 
-  'jasmineNodeOpts': {
+   seleniumAddress: 'http://localhost:4444/wd/hub',
+
+   capabilities: {
+    'browserName': 'firefox'
+   },
+
+   'jasmineNodeOpts': {
     'defaultTimeoutInterval': 60000
-  }
+   }
 };

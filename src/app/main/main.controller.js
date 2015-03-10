@@ -7,9 +7,9 @@ angular.module('Main', [])
     $scope.backgrounds = [];
     $scope.awesomeThings = [
       {
-        'title': 'armstrong-siddley-turbojet',
+        'title': 'Title 1',
         'url': '',
-        'description': 'armstrong-siddley-turbojet',
+        'description': 'description 1s',
         'logo': 'assets/images/background/armstrong-siddley-turbojet.jpg'
       },
       {
@@ -31,15 +31,15 @@ angular.module('Main', [])
         'logo': 'assets/images/background/bristol-pegasus.jpg'
       },
       {
-        'title': 'merlin',
+        'title': '',
         'url': '',
-        'description': 'merlin',
+        'description': '',
         'logo': 'assets/images/background/merlin.jpg'
       },
       {
-        'title': 'wright',
+        'title': '',
         'url': '',
-        'description': 'wright',
+        'description': '',
         'logo': 'assets/images/background/wright-flyer.jpg'
       }
 
@@ -48,8 +48,6 @@ angular.module('Main', [])
     for (var i in $scope.awesomeThings) {
       $scope.backgrounds.push($scope.awesomeThings[i].logo);
     }
-    angular.forEach($scope.awesomeThings, function(awesomeThing) {
-      awesomeThing.rank = Math.random();
-    });
+
   });
 })();
