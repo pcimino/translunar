@@ -18,7 +18,7 @@ angular.module('Projects', [])
       {
         'title': 'STEM Store',
         'url': 'http://stem-store.translunardesigns.com/#/',
-        'description': 'A simple catalog, with a Responsive UI for mobile, put together for a local high school student store.',
+        'description': 'A simple catalog, with a Responsive Mobile UI, created for a local high school student store.',
         'logo': 'assets/images/projects/stem.png'
       },
       {
