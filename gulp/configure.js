@@ -48,7 +48,8 @@ module.exports = function(gulp, runSequence) {
       NOT_BOWER + '**/*.gzip'
     ],
     BOWER_RAW:[
-      BOWER + '**/*.js', NOT_BOWER + '**/*.min.js',
+      BOWER + '**/*.js',
+      NOT_BOWER + '**/*.min.js',
       NOT_BOWER + '**/*mock*.js',
       NOT_BOWER + 'foundation/js/foundation/*',
       NOT_BOWER + 'foundation/js/vendor/*',

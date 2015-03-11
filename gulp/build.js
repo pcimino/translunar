@@ -70,7 +70,6 @@ module.exports = function(gulp, runSequence, config) {
 
   // Build HTML
   gulp.task('html-page', function() {
-    config.rawFlag=true;
     var assets = config.$.useref.assets();
     var sources = gulp.src(config.JS_SRC, {read: false});
     return gulp.src(config.HTML_SRC)
