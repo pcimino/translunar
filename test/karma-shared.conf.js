@@ -17,11 +17,9 @@ module.exports = function(config, specificOptions, browserList) {
     basePath : '../',
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
-    files : config.JS_TEST_SRC,
-
     // list of files / patterns to exclude
     exclude: [
-        'bower_components/angular-ui/**/*Spec.js'
+        'bower_components/angular-ui/**/*.spec.js'
     ],
 
     logColors: true,

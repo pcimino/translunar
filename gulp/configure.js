@@ -12,10 +12,11 @@ module.exports = function(gulp, runSequence) {
     lazy: true
   });
   var SRC = 'src/';
+  var JASMINE = SRC; // if set to /test/jasmine or another directory then used in the watch-test
   var NOT_SRC = '!src/';
   var BUILD = 'build/';
   var NOT_BUILD = '!build/';
-
+  var TEST_EXT = '.spec';
   var BOWER = 'bower_components/';
   var NOT_BOWER = '!bower_components/';
 
@@ -68,7 +69,7 @@ module.exports = function(gulp, runSequence) {
       ' @version v<%= pkg.version %>',
       ' @copyright <%= pkg.licenses.copyright %>',
       ' @url <%= pkg.licenses.url %>'],
-    JS_SRC:[SRC + 'app/index.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*', NOT_SRC + '**/*.spec.js'],
+    JS_SRC:[SRC + 'app/index.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*', NOT_SRC + '**/*' + TEST_EXT + '.js'],
     JS_LIB:[
       BUILD + 'lib/**/angular.*.js',
       '!' + BUILD + 'lib/**/angular-mocks*.js',
@@ -104,8 +105,10 @@ module.exports = function(gulp, runSequence) {
       'src/**/*.html'
     ],
     JS_TESTS: [
-      'src/**/*.spec.js'
-    ]
+      'src/**/*' + TEST_EXT + '.js'
+    ],
+    TEST_EXT:TEST_EXT,
+    JASMINE:JASMINE
   };
 
 // load script files

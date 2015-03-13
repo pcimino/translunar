@@ -56,13 +56,13 @@ module.exports = function(gulp, runSequence, config) {
     // watch for test changes
     var fileList = [];
     fileList = fileList.concat(config.JS_TESTS);
+    fileList = fileList.concat(config.JS_TEST_SRC);
+
     gulp.watch(fileList, function(changed) {
       addChangedFileToTestList(changed);
       console.log(JSON.stringify(changed, null, 2));
       runSequence('test', callBackHandler);
     });
-
-
   });
 
   /**
@@ -84,28 +84,24 @@ module.exports = function(gulp, runSequence, config) {
       // only want to test changed files
       // so find the JavaScript name and change it to Name*.js: IF the NameController.js changed, then the NAMEControllerSpec.js will run
       fileTest = fileTest.substring(0, fileTest.lastIndexOf('.js'));
-      if (fileTest.lastIndexOf('Spec') > 0) {
-        fileTest = fileTest.substring(0, fileTest.lastIndexOf('Spec'));
+      if (fileTest.lastIndexOf(config.TEST_EXT) > 0) {
+        fileTest = fileTest.substring(0, fileTest.lastIndexOf(config.TEST_EXT));
       }
 
       // check for duplicates
       // this is really overkill because if karma sees two files ['my.spec_1.js', 'my.spec_1.js'] it'll only run the test once
       // in theory if a dev is running the watch continuously over a long time with the same changes the array will
       // blow up memory, but unlikely
-      var filePattern = fileTest.replace('\\src\\', '\\test\\jasmine\\').replace('/src/', '/test/jasmine/') + '.spec.js';
+      var filePattern = fileTest.replace('\\src\\', '\\test\\jasmine\\').replace('/src/', '/test/jasmine/') + config.TEST_EXT + '.js';
       // make sure the Spec file exists (i.e. my.controller.spec.js doesn't exist
       if (fs.existsSync(filePattern)) {
-        console.log(1);
         var addFlag = true;
-        console.log(2);
         for (var i = 0; i < config.karmaTestFiles.length; i++) {
           if (config.karmaTestFiles[i] === filePattern) {
             addFlag = false;
             break;
           }
-          console.log(4);
         }
-        console.log(5);
         if (addFlag) {
           config.karmaTestFiles.push(filePattern);
         }
