@@ -16,7 +16,7 @@ module.exports = function(gulp, runSequence) {
   var NOT_SRC = '!src/';
   var BUILD = 'build/';
   var NOT_BUILD = '!build/';
-  var TEST_EXT = '.spec';
+  var specExt = '.spec';
   var BOWER = 'bower_components/';
   var NOT_BOWER = '!bower_components/';
 
@@ -69,7 +69,7 @@ module.exports = function(gulp, runSequence) {
       ' @version v<%= pkg.version %>',
       ' @copyright <%= pkg.licenses.copyright %>',
       ' @url <%= pkg.licenses.url %>'],
-    JS_SRC:[SRC + 'app/index.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*', NOT_SRC + '**/*' + TEST_EXT + '.js'],
+    JS_SRC:[SRC + 'app/index.js', SRC + '**/*.js', NOT_SRC + 'lib/**/*', NOT_SRC + '**/*' + specExt + '.js'],
     JS_LIB:[
       BUILD + 'lib/**/angular.*.js',
       '!' + BUILD + 'lib/**/angular-mocks*.js',
@@ -105,9 +105,9 @@ module.exports = function(gulp, runSequence) {
       'src/**/*.html'
     ],
     JS_TESTS: [
-      'src/**/*' + TEST_EXT + '.js'
+      'src/**/*' + specExt + '.js'
     ],
-    TEST_EXT:TEST_EXT,
+    specExt:specExt,
     JASMINE:JASMINE
   };
 
