@@ -11,7 +11,7 @@ module.exports = function(gulp, runSequence, config) {
   var callBackHandler = function() {
   };
 
-  gulp.task('watch-app', function() {
+  gulp.task('watch-app', ['watch-test'], function() {
     // icon changes
     gulp.watch(config.SRC + '**/*.ico', ['copy-ico']);
 
@@ -25,7 +25,7 @@ module.exports = function(gulp, runSequence, config) {
     gulp.watch([config.JS_SRC], ['scripts-sequence']);
 
     // watch for test changes
-    var fileList = fileList.concat(config.JS_TEST_SRC);
+    var fileList = [];
     fileList = fileList.concat(config.JS_TESTS);
     gulp.watch(fileList, function(changed) {
       addChangedFileToTestList(changed);
@@ -54,7 +54,6 @@ module.exports = function(gulp, runSequence, config) {
    gulp.task('watch-test', function() {
     // watch for test changes
     var fileList = [];
-    fileList = fileList.concat(config.JS_TEST_SRC);
     fileList = fileList.concat(config.JS_TESTS);
     // give all file resources a chance to close
     // some IDEs take a fraction of a second when saving all files

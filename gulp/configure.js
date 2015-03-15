@@ -105,7 +105,8 @@ module.exports = function(gulp, runSequence) {
       'src/**/*.html'
     ],
     JS_TESTS: [
-      'src/**/*' + specExt + '.js'
+      'src/**/*' + specExt + '.js',
+      'src/**/*.js'
     ],
     specExt:specExt,
     JASMINE:JASMINE
@@ -121,6 +122,7 @@ module.exports = function(gulp, runSequence) {
   var e2eTestTasks = require('./e2e-tests');
   var serverTasks = require('./server');
   var proxyTasks = require('./proxy');
+  config.proxyTasks = proxyTasks;
   var injectTasks = require('./inject');
   var stylesTasks = require('./styles');
 

@@ -3,7 +3,7 @@ module.exports = function(gulp, runSequence, config) {
 
 var util = require('util');
 var browserSync = require('browser-sync');
-var middleware = require('./proxy');
+//var middleware = require('./proxy');
 
 function browserSyncInit(baseDir, files, browser) {
   browser = browser === undefined ? 'default' : browser;
@@ -19,23 +19,23 @@ function browserSyncInit(baseDir, files, browser) {
     startPath: '/',
     server: {
       baseDir: baseDir,
-      middleware: middleware,
+      middleware: config.proxyTasks,
       routes: routes
     },
     browser: browser
   });
 }
 
-gulp.task('serve', ['watch'], function () {
+gulp.task('serve', function () {
   browserSyncInit([
-    config.TMP + '/serve',
+    '.tmp/serve',
     config.SRC
   ], [
-    config.TMP + '/serve/{app,components}/**/*.css',
+    '.tmp/serve/{app,components}/**/*.css',
     config.SRC + '/{app,components}/**/*.js',
     config.SRC + 'src/assets/images/**/*',
-    config.TMP + '/serve/*.html',
-    config.TMP + '/serve/{app,components}/**/*.html',
+    '.tmp/serve/*.html',
+    '.tmp/serve/{app,components}/**/*.html',
     config.SRC + '/{app,components}/**/*.html'
   ]);
 });
@@ -48,8 +48,8 @@ gulp.task('serve:e2e', ['inject'], function () {
   browserSyncInit([config.TMP + '/serve', config.SRC], null, []);
 });
 
-gulp.task('serve:e2e-dist', ['build'], function () {
-  browserSyncInit(config.DIST, null, []);
+gulp.task('serve:e2e-dist', function () {
+  browserSyncInit(config.DIST, config.DIST, []);
 });
 
 };
