@@ -12,9 +12,9 @@ var config = configure(gulp, runSequence);
 // Watch
 gulp.task('build', function(callback) {
   if (config.watchFlag) {
-    runSequence('build-core', 'revision', 'minify-html', 'watch-app', callback);
+    runSequence('build-core', 'revision', 'minify-html', ['watch-app', 'watch-test', 'serve'], callback);
   } else {
-    runSequence('build-core', 'revision', 'minify-html',  callback);
+    runSequence('build-core', 'revision', 'minify-html', callback);
   }
 });
 

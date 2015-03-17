@@ -121,8 +121,6 @@ module.exports = function(gulp, runSequence) {
   var unitTestTasks = require('./unit-tests');
   var e2eTestTasks = require('./e2e-tests');
   var serverTasks = require('./server');
-  var proxyTasks = require('./proxy');
-  config.proxyTasks = proxyTasks;
   var injectTasks = require('./inject');
   var stylesTasks = require('./styles');
 
@@ -135,7 +133,6 @@ module.exports = function(gulp, runSequence) {
   watchTasks(gulp, runSequence, config);
   unitTestTasks(gulp, runSequence, config);
   e2eTestTasks(gulp, runSequence, config);
-  proxyTasks(gulp, runSequence, config);
   injectTasks(gulp, runSequence, config);
   serverTasks(gulp, runSequence, config);
   revisionTasks(gulp, runSequence, config);

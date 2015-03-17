@@ -24,15 +24,6 @@ module.exports = function(gulp, runSequence, config) {
     // JavaScript changes
     gulp.watch([config.JS_SRC], ['scripts-sequence']);
 
-    // watch for test changes
-    var fileList = [];
-    fileList = fileList.concat(config.JS_TESTS);
-    gulp.watch(fileList, function(changed) {
-      addChangedFileToTestList(changed);
-      console.log(JSON.stringify(changed, null, 2));
-      runSequence('test', 'jshint', callBackHandler);
-    });
-
     // watch for Image changes, fonts and styles
     gulp.watch([config.IMAGE_SRC, config.CSS_SRC, config.SASS_SRC, config.TYPE_FACES], ['image-min', 'styles-sass', 'fonts']);
 
@@ -46,12 +37,19 @@ module.exports = function(gulp, runSequence, config) {
     gulp.watch([mainBowerFiles(), config.BOWER_COMPONENTS, config.SRC + '**/*.ico'], ['copy-bower', 'fonts-bower', 'copy-ico']);
 
     // watch for changes in the build directory
-    gulp.watch(config.BUILD + '**/*', config.$.batch({timeout:8000}, function(events, callBackHandler) {
+    gulp.watch(config.BUILD + '**/*', function(events, callBackHandler) {
+      runSequence('revision', callBackHandler);
+    });
+
+    // TODO Batch started throwing a path assertion error
+/*
+    gulp.watch(config.BUILD, config.$.batch({timeout:8000}, function(events, callBackHandler) {
       runSequence('revision', callBackHandler);
     }));
+  */
   });
 
-   gulp.task('watch-test', function() {
+  gulp.task('watch-test', function() {
     // watch for test changes
     var fileList = [];
     fileList = fileList.concat(config.JS_TESTS);
