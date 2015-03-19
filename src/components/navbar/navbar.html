@@ -1,21 +1,16 @@
-<nav class="top-bar row" ng-controller="NavbarCtrl">
-
+<div class="top-bar row mobile-show-parent-link show-for-medium-up" ng-controller="NavbarCtrl">
   <section class="top-bar-section">
-    <ul class="right">
-      <li ng-class="{active: isActive(navItem)}" ng-repeat="navItem in nav">
-        <a ng-href="{{navItem.path}}">{{navItem.desc}}</a>
-      </li>
-    </ul>
-
-  </section>
-  <!--
-  <section class="top-bar-section">
-    <ul class="right">
-      <li detect-active-tab ng-repeat="navItem in nav">
+    <ul class="left">
+      <li ng-class="{active: isActive(navItem)}" ng-repeat="navItem in navItems">
         <a ng-href="{{navItem.path}}">{{navItem.desc}}</a>
       </li>
     </ul>
   </section>
--->
-</nav>
+</div>
+
+<div class="top-bar row mobile-show-parent-link show-for-small-only" ng-controller="NavbarCtrl">
+  <section class="top-bar-section left">
+        <a class="top-bar-link-margin" ng-repeat="navItem in navItems" ng-href="{{navItem.path}}">{{navItem.desc}}</a>
+  </section>
+</div>
 

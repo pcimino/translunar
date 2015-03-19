@@ -2,7 +2,7 @@
 (function () {
 angular.module('translunar')
   .controller('NavbarCtrl', function ($scope, $location) {
-    $scope.nav = [
+    $scope.navItems = [
       {path:'#/home', desc:'Home'},
       {path:'#/about', desc:'About'},
       {path:'#/clients', desc:'Clients'},
