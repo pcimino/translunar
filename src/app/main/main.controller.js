@@ -7,7 +7,7 @@ angular.module('Main', [])
     $scope.backgrounds = [];
     $scope.awesomeThings = [
       {
-        'title': 'Agile Leadership',
+        'title': '2Agile Leadership',
         'url': '',
         'description': 'Certified Scrum Master, experienced teams.',
         'logo': 'assets/images/background/armstrong-siddley-turbojet.jpg'

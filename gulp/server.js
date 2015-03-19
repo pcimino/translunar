@@ -20,10 +20,13 @@ module.exports = function(gulp, runSequence, config) {
         baseDir: baseDir,
         routes: routes
       },
-      browser: browser
+      browser: browser,
+      watchOptions: {
+        debounceDelay: 4000
+      }
     });
   }
-
+//http://www.shakyshane.com/javascript/nodejs/browser-sync/2014/08/24/browser-sync-plus-grunt/
   gulp.task('serve', function () {
     browserSyncInit('./' + config.DIST, './' + config.DIST + '/**/*', ['chrome']);
   });
