@@ -1,4 +1,4 @@
-var port = process.argv[2] || 8080;
+var port = process.argv[2] || 8888;
 var express = require('express');
 var app = express();
 var ip = '127.0.0.1';
