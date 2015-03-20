@@ -51,3 +51,11 @@ gulp.task('build-raw', function(callback) {
 gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
+
+gulp.task('help', function() {
+  console.log('default');
+  console.log('build');
+  console.log('build-raw');
+  console.log('build-watch');
+  console.log('build-watch-raw');
+});

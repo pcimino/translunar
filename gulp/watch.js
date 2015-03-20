@@ -33,7 +33,7 @@ module.exports = function(gulp, runSequence, config) {
     gulp.watch([mainBowerFiles(), config.BOWER_COMPONENTS, config.SRC + '**/*.ico'], ['copy-bower', 'fonts-bower', 'copy-ico']);
 
     // watch for changes in the build directory
-    gulp.watch(config.BUILD, config.$.batch({timeout:8000}, function(events, callBackHandler) {
+    gulp.watch(config.BUILD, config.$.batch({timeout:8000}, function() {
       runSequence('revision', function() {});
     }));
 

@@ -1,22 +1,8 @@
-<<<<<<< Updated upstream
+
 <div class="top-bar row mobile-show-parent-link show-for-medium-up" ng-controller="NavbarCtrl">
   <section class="top-bar-section">
     <ul class="left">
       <li ng-class="{active: isActive(navItem)}" ng-repeat="navItem in navItems">
-=======
-<nav class="top-bar row" data-topbar ng-controller="NavbarCtrl">
-
-  <ul class="title-area">
-    <li class="toggle-topbar menu-icon">
-      <a href="#">
-        <span>Menu</span>
-      </a>
-    </li>
-  </ul>
-  <section class="top-bar-section">
-    <ul class="right">
-      <li class="top_bar_li" ng-class="{active: isActive(navItem)}" ng-repeat="navItem in nav">
->>>>>>> Stashed changes
         <a ng-href="{{navItem.path}}">{{navItem.desc}}</a>
       </li>
     </ul>

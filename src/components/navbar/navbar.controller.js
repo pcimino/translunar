@@ -1,13 +1,8 @@
 'use strict';
 (function () {
 angular.module('translunar')
-<<<<<<< Updated upstream
   .controller('NavbarCtrl', function ($scope, $location) {
     $scope.navItems = [
-=======
-  .controller('NavbarCtrl', function ($scope, $location, $document) {
-    $scope.nav = [
->>>>>>> Stashed changes
       {path:'#/home', desc:'Home'},
       {path:'#/about', desc:'About'},
       {path:'#/clients', desc:'Clients'},
@@ -23,6 +18,5 @@ angular.module('translunar')
 
       return pathIndex > 0 ? 'active' : '';
     };
-    $document.foundation('topbar');
   });
 })();
