@@ -7,11 +7,7 @@ module.exports = function(gulp, runSequence, config) {
   var fs = require('fs');
   var mainBowerFiles = config.$.mainBowerFiles;
 
-  // dummy callBack prevents emit error on too many callBacks
-  var callBackHandler = function() {
-  };
-
-  gulp.task('watch-app', ['watch-test'], function() {
+  gulp.task('watch-app', function() {
     // icon changes
     gulp.watch(config.SRC + '**/*.ico', ['copy-ico']);
 
@@ -38,7 +34,7 @@ module.exports = function(gulp, runSequence, config) {
 
     // watch for changes in the build directory
     gulp.watch(config.BUILD, config.$.batch({timeout:8000}, function(events, callBackHandler) {
-      runSequence('revision', callBackHandler);
+      runSequence('revision', function() {});
     }));
 
   });
@@ -46,14 +42,20 @@ module.exports = function(gulp, runSequence, config) {
   gulp.task('watch-test', function() {
     // watch for test changes
     var fileList = [];
+    fileList = fileList.concat(config.JS_TEST_SRC);
     fileList = fileList.concat(config.JS_TESTS);
+    console.log(fileList);
     // give all file resources a chance to close
     // some IDEs take a fraction of a second when saving all files
     setTimeout(function() {
       gulp.watch(fileList, function(changed) {
-        addChangedFileToTestList(changed);
         console.log(JSON.stringify(changed, null, 2));
-        runSequence('test', callBackHandler);
+        if (!addChangedFileToTestList(changed)) {
+          config.karmaTestFiles = [];
+          config.karmaTestFiles = config.karmaTestFiles.concat(config.JS_TEST_SRC);
+          config.karmaTestFiles = config.karmaTestFiles.concat(config.JS_TESTS);
+        }
+        runSequence('test', function() {config.karmaTestFiles = [];});
       });
     }, 500);
   });

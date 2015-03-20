@@ -2,8 +2,8 @@ module.exports = function(gulp, runSequence, config) {
   'use strict';
 
 
-  gulp.task('test', function(callback) {
-    runSequence('clean-coverage', 'test-changes', callback);
+  gulp.task('test', ['clean-coverage'], function() {
+    runSequence('test-changes');
   });
 
   gulp.task('test-changes', function() {
