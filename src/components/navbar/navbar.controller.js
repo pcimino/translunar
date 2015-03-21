@@ -13,7 +13,7 @@ angular.module('translunar')
     // http://coder1.com/articles/angularjs-managing-active-nav-elements
     // http://jsfiddle.net/uDPHL/146/
     $scope.isActive = function(navItem) {
-      var currentRoute = $location.path().substring(1) || $scope.nav[0].path.substring(2);
+      var currentRoute = $location.path().substring(1) || $scope.navItems[0].path.substring(2);
       var pathIndex = navItem.path.indexOf(currentRoute);
 
       return pathIndex > 0 ? 'active' : '';

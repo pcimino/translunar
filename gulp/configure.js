@@ -46,6 +46,7 @@ module.exports = function(gulp, runSequence) {
       NOT_BOWER + 'foundation/js/foundation/*',
       NOT_BOWER + 'foundation/js/vendor/*',
       NOT_BOWER + 'modernizr/{feature-detects,media,test}/*',
+      NOT_BOWER + 'jquery/src/***/*',
       NOT_BOWER + '**/*.gzip'
     ],
     BOWER_RAW:[
@@ -55,6 +56,7 @@ module.exports = function(gulp, runSequence) {
       NOT_BOWER + 'foundation/js/foundation/*',
       NOT_BOWER + 'foundation/js/vendor/*',
       NOT_BOWER + 'modernizr/{feature-detects,media,test}/*',
+      NOT_BOWER + 'jquery/src/***/*',
       NOT_BOWER + '**/*.gzip'
     ],
     IMAGE_SRC:SRC + '/assets/**/*',

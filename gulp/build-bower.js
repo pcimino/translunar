@@ -8,7 +8,7 @@ module.exports = function(gulp, runSequence, config) {
     // copy both .js and .js.map files
     var fileList = config.BOWER_MIN;
     if (config.rawFlag) {
-      fileList = config.BOWER_RAW;
+    ///  fileList = config.BOWER_RAW;
     }
     console.log(fileList);
     return gulp.src(fileList)
