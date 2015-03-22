@@ -2,7 +2,7 @@
 <div class="top-bar row mobile-show-parent-link show-for-medium-up" ng-controller="NavbarCtrl">
   <section class="top-bar-section">
     <ul class="left">
-      <li ng-class="{active: isActive(navItem)}" ng-repeat="navItem in navItems">
+      <li ng-class="{active: isActive(navItem)}" ng-repeat="navItem in ::navItems">
         <a ng-href="{{navItem.path}}">{{navItem.desc}}</a>
       </li>
     </ul>
@@ -11,7 +11,7 @@
 
 <div class="top-bar row mobile-show-parent-link show-for-small-only" ng-controller="NavbarCtrl">
   <section class="top-bar-section left">
-        <a class="top-bar-link-margin" ng-repeat="navItem in navItems" ng-href="{{navItem.path}}">{{navItem.desc}}</a>
+        <a class="top-bar-link-margin" ng-repeat="navItem in ::navItems" ng-href="{{navItem.path}}">{{navItem.desc}}</a>
   </section>
 </div>
 
